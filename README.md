@@ -74,3 +74,60 @@ SELECT name,
 
 	FROM cd.facilities; 
 ```
+
+- [Working with dates](https://www.pgexercises.com/questions/basic/date.html)
+```SQL
+select memid,surname,firstname,joindate
+	from cd.members
+	where joindate >= '2012-09-01';
+```
+
+- [Removing duplicates, and ordering results](https://www.pgexercises.com/questions/basic/unique.html)
+```SQL
+select distinct surname 
+	from cd.members 
+		order by surname 
+		limit 10;
+```
+
+- [Combining results from multiple queries](https://www.pgexercises.com/questions/basic/union.html)
+
+```SQL
+select surname 
+	from cd.members
+union
+select name
+	from cd.facilities;
+```
+
+- [Simple aggregation](https://www.pgexercises.com/questions/basic/agg.html)
+```SQL
+select joindate as "latest" 
+	from cd.members 
+	order by joindate desc 
+	limit 1;
+```
+
+or
+
+```SQL
+select max(joindate) as latest
+	from cd.members;
+```
+
+- [More aggregation](https://www.pgexercises.com/questions/basic/agg2.html)
+```SQL
+select firstname,surname,joindate
+	from cd.members 
+		order by joindate desc 
+		limit 1;
+```
+or
+
+```SQL
+select firstname, surname, joindate
+	from cd.members
+	where joindate = 
+		(select max(joindate) 
+			from cd.members);
+```
