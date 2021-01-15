@@ -55,3 +55,22 @@ SELECT facid,name,membercost,monthlymaintenance
  	WHERE
  		name LIKE '%Tennis%';
  ```
+
+- [Matching against multiple possible values](https://www.pgexercises.com/questions/basic/where4.html)
+```SQL
+SELECT * 
+	FROM cd.facilities
+	WHERE facid IN (1,5);
+```
+
+- [Classify results into buckets](https://www.pgexercises.com/questions/basic/classify.html)
+```SQL
+SELECT name,
+	case when (monthlymaintenance > 100) then
+		'expensive'
+	else
+		'cheap'
+	end as cost
+
+	FROM cd.facilities; 
+```
