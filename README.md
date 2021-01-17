@@ -131,3 +131,17 @@ select firstname, surname, joindate
 		(select max(joindate) 
 			from cd.members);
 ```
+
+
+# Joins and Subqueries
+
+- [Retrieve the start times of members' bookings](https://www.pgexercises.com/questions/joins/simplejoin.html)
+
+```SQL
+select bks.starttime 
+	from cd.bookings bks
+		inner join cd.members mems
+		on mems.memid = bks.memid
+			where mems.firstname='David' 
+			and mems.surname='Farrell';
+```
