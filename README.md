@@ -159,3 +159,14 @@ select bks.starttime as start,fac.name
 		and bks.starttime < '2012-09-22'
 	order by bks.starttime;
 ```
+
+-[Produce a list of all members who have recommended another member](https://www.pgexercises.com/questions/joins/self.html)
+
+```SQL
+select distinct mem.firstname, mem.surname
+	from
+		cd.members mem
+		inner join cd.members mems
+		on mems.recommendedby=mem.memid
+	order by surname,firstname;
+```
