@@ -126,8 +126,7 @@ or
 
 ```SQL
 select firstname, surname, joindate
-	from cd.members
-	where joindate = 
+	from cd.membersmerge
 		(select max(joindate) 
 			from cd.members);
 ```
@@ -144,4 +143,19 @@ select bks.starttime
 		on mems.memid = bks.memid
 			where mems.firstname='David' 
 			and mems.surname='Farrell';
+```
+
+- [Work out the start times of bookings for tennis courts](https://www.pgexercises.com/questions/joins/simplejoin2.html)
+
+```SQL
+select bks.starttime as start,fac.name
+	from
+		cd.bookings bks
+		inner join cd.facilities fac
+		on bks.facid=fac.facid
+	where
+		fac.name like 'Tennis%'
+		and bks.starttime >= '2012-09-21'
+		and bks.starttime < '2012-09-22'
+	order by bks.starttime;
 ```
