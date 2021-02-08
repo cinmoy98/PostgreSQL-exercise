@@ -215,7 +215,7 @@ select distinct mems.firstname || ' ' || mems.surname as member, facs.name as fa
 order by member, facility;
 ```
 
--[]()
+-[Produce a list of costly bookings](https://www.pgexercises.com/questions/joins/threejoin2.html)
 
 ```SQL
 select concat(mem.firstname, ' ', mem.surname), fac.name as facility,
@@ -242,4 +242,20 @@ select concat(mem.firstname, ' ', mem.surname), fac.name as facility,
 			else
 				bks.slots*membercost end) > 30
 	order by cost desc;
+```
+
+-[Produce a list of all members, along with their recommender, using no joins.](https://www.pgexercises.com/questions/joins/sub.html)
+
+```SQL
+select distinct concat(mem.firstname, ' ',mem.surname) as member,
+(select concat(rec.firstname, ' ', rec.surname) as recommender
+ 	from
+ 		cd.members rec
+ 	where
+		rec.memid = mem.recommendedby
+)
+from
+	cd.members mem
+order by
+	member;
 ```
