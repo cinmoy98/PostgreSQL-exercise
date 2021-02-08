@@ -170,3 +170,16 @@ select distinct mem.firstname, mem.surname
 		on mems.recommendedby=mem.memid
 	order by surname,firstname;
 ```
+
+-[Produce a list of all members, along with their recommender](https://www.pgexercises.com/questions/joins/self2.html)
+
+```SQL
+select mem.firstname as memfname, mem.surname as memsname,
+	   memr.firstname as recfname, memr.surname as recsname
+	from
+		cd.members mem
+	left outer join cd.members memr
+		on mem.recommendedby=memr.memid
+	order by
+		mem.surname, mem.firstname;
+```
