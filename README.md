@@ -183,3 +183,34 @@ select mem.firstname as memfname, mem.surname as memsname,
 	order by
 		mem.surname, mem.firstname;
 ```
+
+-[Produce a list of all members who have used a tennis court](https://www.pgexercises.com/questions/joins/threejoin.html)
+
+```SQL
+select distinct concat(mem.firstname, ' ', mem.surname) as member, fac.name as facility
+	from
+		cd.members mem
+	inner join cd.bookings bks
+		on mem.memid=bks.memid
+	inner join cd.facilities fac
+		on bks.facid=fac.facid
+	where
+		fac.name like 'Tennis%'
+	order by
+		member, facility;
+```
+
+OR,
+
+```SQL
+select distinct mems.firstname || ' ' || mems.surname as member, facs.name as facility
+	from 
+		cd.members mems
+		inner join cd.bookings bks
+			on mems.memid = bks.memid
+		inner join cd.facilities facs
+			on bks.facid = facs.facid
+	where
+		facs.name in ('Tennis Court 2','Tennis Court 1')
+order by member, facility;
+```
