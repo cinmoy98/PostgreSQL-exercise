@@ -214,3 +214,32 @@ select distinct mems.firstname || ' ' || mems.surname as member, facs.name as fa
 		facs.name in ('Tennis Court 2','Tennis Court 1')
 order by member, facility;
 ```
+
+-[]()
+
+```SQL
+select concat(mem.firstname, ' ', mem.surname), fac.name as facility,
+	case
+		when
+			mem.memid=0 then bks.slots*fac.guestcost
+		else
+			bks.slots*membercost
+	end  as cost
+
+	from
+		cd.members mem
+	inner join cd.bookings bks
+		on mem.memid=bks.memid
+	inner join cd.facilities fac
+		on bks.facid=fac.facid
+	
+	where
+		bks.starttime >= '2012-09-14' and
+		bks.starttime < '2012-09-15' and
+		(case
+			when
+				mem.memid=0 then bks.slots*fac.guestcost
+			else
+				bks.slots*membercost end) > 30
+	order by cost desc;
+```
